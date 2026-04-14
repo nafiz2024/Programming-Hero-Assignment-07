@@ -33,14 +33,14 @@ const Navbar = () => {
                     </a>
                 </div>
                 <div className="navbar-end hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
-                        <NavLink to="/" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
+                    <ul className="menu menu-horizontal px-1 space-x-3">
+                        <NavLink to="/" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
                             <RiHome2Line /> Home
                         </NavLink>
-                        <NavLink to="/timeline" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
+                        <NavLink to="/timeline" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
                             <LuClock3 /> Timeline
                         </NavLink>
-                        <NavLink to="/friends-details" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
+                        <NavLink to="/friends-details" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
                             <BsGraphUp /> Stats
                         </NavLink>
                     </ul>

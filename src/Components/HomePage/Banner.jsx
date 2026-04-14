@@ -17,7 +17,7 @@ const Banner = () => {
                 </p>
             </div>
             <div className="">
-                <div className="btn bg-[#244D3F] text-white py-3 px-4 rounded-sm text-lg font-semibold"><MdAdd /> Add a Friend</div>
+                <div className="btn bg-[#244D3F] text-white py-3 px-4 rounded-sm text-lg font-semibold border border-[#244D3F] hover:bg-transparent hover:text-[#244D3F]"><MdAdd /> Add a Friend</div>
             </div>
         </div>
     );
