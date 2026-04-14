@@ -8,7 +8,7 @@ import FooterText from './FooterText';
 const Footer = () => {
     return (
         <div className='bg-[#244D3F] text-white'>
-            <div className="container mx-auto pt-20 flex flex-col items-center gap-6 pb-10 border-b border-[#1A8862]/20">
+            <div className="container mx-auto pt-20 flex flex-col items-center gap-6 pb-10 border-b border-[#1A8862]/20 px-5 lg:px-0 text-center">
                 <div className="flex flex-col items-center gap-4">
                     <img src={Footer_Logo} alt="KeenKeeper" />
                     <p>Your personal shelf of meaningful connections. Browse, tend, and nurture the relationships that matter most.</p>
