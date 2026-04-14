@@ -13,7 +13,7 @@ const FriendCard = ({ friend }) => {
                 <h1 className='text-xl font-semibold'>{name}</h1>
                 <p className='text-[12px] text-[#64748B]'>{daysSinceContact}d ago</p>
                 <p className='block w-fit mx-auto uppercase text-[12px] text-[#244D3F] font-medium bg-[#CBFADB] rounded-full px-3 py-1'>{tag}</p>
-                <p className='block w-fit mx-auto text-[12px] font-medium text-white bg-[#EFAD44] rounded-full px-3 py-1'>{status}</p>
+                <p className='block w-fit mx-auto uppercase text-[12px] font-medium text-white bg-[#EFAD44] rounded-full px-3 py-1'>{status}</p>
             </div>
         </div>
     );
