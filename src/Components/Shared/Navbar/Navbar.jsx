@@ -3,6 +3,7 @@ import { BsGraphUp } from 'react-icons/bs';
 import { LuClock3 } from 'react-icons/lu';
 import { RiHome2Line } from 'react-icons/ri';
 import { NavLink } from 'react-router';
+import Logo from '../../../assets/logo.png';
 
 const Navbar = () => {
     return (
@@ -27,7 +28,9 @@ const Navbar = () => {
                             </NavLink>
                         </ul>
                     </div>
-                    <a className="text-2xl font-semibold">Keen<span className='text-[#244D3F]'>Keeper</span></a>
+                    <a href="">
+                        <img src={Logo} alt="KeenKeeper" />
+                    </a>
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
