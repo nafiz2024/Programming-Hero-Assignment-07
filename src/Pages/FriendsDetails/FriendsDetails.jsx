@@ -13,7 +13,9 @@ import { getDaysSinceContact } from '../../utils/dateUtils';
 const FriendsDetails = () => {
     const { id } = useParams();
     const friends = useLoaderData();
+    const { clearFriendInteractions, handleInteraction, timeline } = useContext(BookContext);
 
+    // Find the friend that matches the current URL parameter.
     const expectedFriend = friends.find((friend) => friend.id === id);
 
     if (!expectedFriend) {
@@ -59,12 +61,12 @@ const FriendsDetails = () => {
         hobby: 'bg-[#FEF3C7] text-[#B45309]',
     };
 
-    const { handleInteraction, timeline } = useContext(BookContext)
-
+    // Only show the latest interactions for the current friend on this page.
     const recentInteractions = timeline
         .filter((item) => item.friendId === expectedFriend.id)
         .slice(0, 4);
 
+    // Reuse the same interaction icons in the recent activity list.
     const getInteractionIcon = (type) => {
         if (type === 'call') {
             return <img src={callIcon} alt="Call" className="h-4 w-4 object-contain" />;
@@ -82,21 +84,24 @@ const FriendsDetails = () => {
     };
 
     return (
-        <div className="container mx-auto px-5 lg:px-0 py-20">
+        // Profile layout with friend summary, quick actions, and recent activity.
+        <div className="section-fade-in container mx-auto px-5 lg:px-0 py-20">
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-[304px_minmax(0,1fr)]">
                 <div className="space-y-4">
-                    <div className="rounded-2xl border border-[#EEF2F6] bg-white p-6 text-center shadow-sm">
-                        <img src={avatar} alt={name} className="mx-auto h-16 w-16 rounded-full object-cover" />
+                    <div className="interactive-card overflow-hidden rounded-[28px] border border-[#EEF2F6] bg-white p-6 text-center shadow-sm">
+                        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#DDFCE7] via-white to-[#DBEAFE] p-1">
+                        <img src={avatar} alt={name} className="mx-auto h-16 w-16 rounded-full object-cover ring-4 ring-white transition duration-300 hover:scale-105" />
+                        </div>
                         <h1 className="mt-4 text-[18px] font-semibold text-[#1F2937]">{name}</h1>
                         <div className="mt-3 space-y-2">
                             <p
-                                className={`mx-auto w-fit rounded-full px-3 py-1 text-xs font-semibold capitalize ${statusStyles[status] || 'bg-slate-500 text-white'
+                                className={`mx-auto w-fit rounded-full px-3 py-1 text-xs font-semibold capitalize shadow-sm transition duration-200 hover:scale-105 hover:shadow-md ${statusStyles[status] || 'bg-slate-500 text-white'
                                     }`}
                             >
                                 {status}
                             </p>
                             <p
-                                className={`mx-auto w-fit rounded-full px-3 py-1 text-xs font-semibold uppercase ${tagStyles[tag] || 'bg-slate-100 text-slate-700'
+                                className={`mx-auto w-fit rounded-full px-3 py-1 text-xs font-semibold uppercase shadow-sm transition duration-200 hover:scale-105 hover:shadow-md ${tagStyles[tag] || 'bg-slate-100 text-slate-700'
                                     }`}
                             >
                                 {tag}
@@ -107,13 +112,13 @@ const FriendsDetails = () => {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                        <button className='flex items-center justify-center gap-2 w-full text-lg font-medium py-4 border-2 border-[#E9E9E9] rounded-sm bg-white '>
+                        <button className='interactive-button flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#E9E9E9] bg-white py-4 text-lg font-medium'>
                             <RiNotificationSnoozeLine /> Snooze 2 Weeks
                         </button>
-                        <button className='flex items-center justify-center gap-2 w-full text-lg font-medium py-4 border-2 border-[#E9E9E9] rounded-sm bg-white '>
+                        <button className='interactive-button flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#E9E9E9] bg-white py-4 text-lg font-medium'>
                             <IoArchiveOutline /> Archive
                         </button>
-                        <button className='flex items-center justify-center gap-2 w-full text-lg text-[#EF4444] font-medium py-4 border-2 border-[#E9E9E9] rounded-sm bg-white '>
+                        <button className='interactive-button flex w-full items-center justify-center gap-2 rounded-xl border-2 border-[#FEE2E2] bg-white py-4 text-lg font-medium text-[#EF4444] hover:border-[#EF4444] hover:bg-[#FFF5F5]'>
                             <RiDeleteBinLine /> Delete
                         </button>
                     </div>
@@ -122,21 +127,21 @@ const FriendsDetails = () => {
 
                 <div className="space-y-5">
                     <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                        <div className="rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
+                        <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
                             <h2 className="text-[28px] font-semibold text-[#244D3F]">{daysSinceContact}</h2>
                             <p className="mt-1 text-lg text-[#64748B]">Days Since Contact</p>
                         </div>
-                        <div className="rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
+                        <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
                             <h2 className="text-[28px] font-semibold text-[#244D3F]">{goalDays}</h2>
                             <p className="mt-1 text-lg text-[#64748B]">Goal (Days)</p>
                         </div>
-                        <div className="rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
+                        <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
                             <h2 className="text-[28px] font-semibold text-[#244D3F]">{formattedDate}</h2>
                             <p className="mt-1 text-lg text-[#64748B]">Next Due</p>
                         </div>
                     </div>
 
-                    <div className="rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
+                    <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
                         <div className="flex items-start justify-between gap-3">
                             <div>
                                 <h2 className="text-[18px] font-semibold text-[#244D3F]">Relationship Goal</h2>
@@ -144,60 +149,69 @@ const FriendsDetails = () => {
                                     Connect every <span className="font-semibold text-[#1F2937]">{goalDays} days</span>
                                 </p>
                             </div>
-                            <button className="btn">
+                            <button className="btn interactive-button rounded-xl border border-[#DDE6EE] bg-white hover:border-[#244D3F] hover:bg-[#244D3F] hover:text-white">
                                 Edit
                             </button>
                         </div>
                     </div>
 
-                    <div className="rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
+                    <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
                         <h2 className="flex items-center gap-2 text-[18px] font-semibold text-[#244D3F]">
                             Quick Check-In
                         </h2>
                         <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
                             <div className="">
-                                <button onClick={() => handleInteraction(expectedFriend, 'call')} className='bg-[#F8FAFC] border border-[#E9E9E9] flex flex-col items-center justify-center gap-2 w-full p-5 text-2xl rounded-lg'>
+                                <button onClick={() => handleInteraction(expectedFriend, 'call')} className='interactive-button flex w-full flex-col items-center justify-center gap-2 rounded-xl border border-[#E9E9E9] bg-[#F8FAFC] p-5 text-2xl hover:border-[#244D3F] hover:bg-white'>
                                     <LuPhoneCall className='text-4xl' /> Call
                                 </button>
                             </div>
                             <div className="">
-                                <button onClick={() => handleInteraction(expectedFriend, 'text')} className='bg-[#F8FAFC] border border-[#E9E9E9] flex flex-col items-center justify-center gap-2 w-full p-5 text-2xl rounded-lg'>
+                                <button onClick={() => handleInteraction(expectedFriend, 'text')} className='interactive-button flex w-full flex-col items-center justify-center gap-2 rounded-xl border border-[#E9E9E9] bg-[#F8FAFC] p-5 text-2xl hover:border-[#244D3F] hover:bg-white'>
                                     <BsChatLeftText className='text-4xl' /> Text
                                 </button>
                             </div>
                             <div className="">
-                                <button onClick={() => handleInteraction(expectedFriend, 'video')} className='bg-[#F8FAFC] border border-[#E9E9E9] flex flex-col items-center justify-center gap-2 w-full p-5 text-2xl rounded-lg'>
+                                <button onClick={() => handleInteraction(expectedFriend, 'video')} className='interactive-button flex w-full flex-col items-center justify-center gap-2 rounded-xl border border-[#E9E9E9] bg-[#F8FAFC] p-5 text-2xl hover:border-[#244D3F] hover:bg-white'>
                                     <LuVideo className='text-4xl' /> Video
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <div className="rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
+                    <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-6 shadow-sm">
                         <div className="flex items-center justify-between gap-3">
                             <h2 className="text-[18px] font-semibold text-[#244D3F]">
                                 Recent Interactions
                             </h2>
-                            <Link
-                                to="/timeline"
-                                className="rounded-md border border-[#E5E7EB] px-3 py-2 text-xs font-medium text-[#64748B] transition hover:bg-[#F8FAFC]"
-                            >
-                                Full History
-                            </Link>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    onClick={() => clearFriendInteractions(expectedFriend.id)}
+                                    className="interactive-button rounded-md border border-[#FEE2E2] px-3 py-2 text-xs font-medium text-[#EF4444] transition hover:bg-[#FFF5F5]"
+                                >
+                                    Clear
+                                </button>
+                                <Link
+                                    to="/timeline"
+                                    className="interactive-button rounded-md border border-[#E5E7EB] px-3 py-2 text-xs font-medium text-[#64748B] transition hover:bg-[#F8FAFC]"
+                                >
+                                    Full History
+                                </Link>
+                            </div>
                         </div>
 
                         <div className="mt-4">
                             {recentInteractions.length > 0 ? recentInteractions.map((item) => (
                                 <div
                                     key={item.id}
-                                    className="flex items-start justify-between gap-4 border-b border-[#EEF2F6] py-4 last:border-b-0 last:pb-0 first:pt-0"
+                                    className="group flex items-start justify-between gap-4 rounded-xl border-b border-[#EEF2F6] py-4 transition-colors duration-200 last:border-b-0 last:pb-0 first:pt-0 hover:bg-[#F8FAFC]"
                                 >
                                     <div className="flex items-start gap-3">
-                                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#DDE6EE] bg-[#F8FAFC]">
+                                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#DDE6EE] bg-[#F8FAFC] transition duration-200 group-hover:scale-105 group-hover:border-[#244D3F]">
                                             {getInteractionIcon(item.type)}
                                         </div>
                                         <div>
-                                            <h3 className="text-sm font-medium leading-none text-[#1E3A5F]">
+                                            <h3 className="text-sm font-medium leading-none text-[#1E3A5F] transition-colors duration-200 group-hover:text-[#244D3F]">
                                                 {item.title}
                                             </h3>
                                             <p className="mt-2 text-xs text-[#64748B]">

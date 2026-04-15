@@ -6,6 +6,7 @@ import { router } from "./Routes/Routes.jsx";
 import { ToastContainer } from 'react-toastify';
 import FriendProvider from './Context/Context.jsx';
 
+// App entry point: wraps routing, toast notifications, and shared interaction state.
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <FriendProvider>

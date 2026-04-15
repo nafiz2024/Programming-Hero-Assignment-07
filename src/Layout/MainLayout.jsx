@@ -5,6 +5,7 @@ import Footer from '../Components/Shared/Footer/Footer.jsx';
 
 const MainLayout = () => {
     return (
+        // Shared page shell used by every route.
         <div className='min-h-screen flex flex-col'>
             <Navbar />
             <div className='flex-1'>

@@ -6,6 +6,7 @@ import Timeline from "../Pages/Timeline/Timeline.jsx";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage.jsx";
 import Stats from "../Pages/Stats/Stats.jsx";
 
+// Central app routes: home, timeline, stats, and dynamic friend details page.
 export const router = createBrowserRouter([
     {
         path: '/',
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
             {
                 path: 'friendsdetails/:id',
                 Component: FriendsDetails,
+                // Load the shared friend dataset before rendering a details page.
                 loader: () => fetch("/FriendsData.json")
             },
         ]

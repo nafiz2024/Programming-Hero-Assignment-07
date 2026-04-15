@@ -1,3 +1,4 @@
+// Converts a stored contact date into "how many days ago" for cards/details.
 export const getDaysSinceContact = (lastContactDate) => {
     if (!lastContactDate) {
         return 0;
@@ -18,6 +19,7 @@ export const getDaysSinceContact = (lastContactDate) => {
 const TIMELINE_STORAGE_KEY = 'keen-keeper-timeline';
 const ONE_DAY_IN_MS = 24 * 60 * 60 * 1000;
 
+// Keeps only the interactions created within the last 24 hours.
 export const getValidTimelineItems = (items) => {
     const now = Date.now();
 
@@ -32,6 +34,7 @@ export const getValidTimelineItems = (items) => {
     });
 };
 
+// Reads timeline data from localStorage and cleans expired/invalid entries.
 export const getStoredTimeline = () => {
     if (typeof window === 'undefined') {
         return [];
@@ -56,6 +59,7 @@ export const getStoredTimeline = () => {
     }
 };
 
+// Persists the current valid timeline so refreshes keep the latest interactions.
 export const saveTimelineToStorage = (timeline) => {
     if (typeof window === 'undefined') {
         return;

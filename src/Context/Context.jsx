@@ -10,9 +10,11 @@ export const BookContext = createContext();
 
 const FriendProvider = ({ children }) => {
 
+    // Shared interaction list used by timeline, stats, and recent activity UI.
     const [timeline, setTimeline] = useState(() => getStoredTimeline());
 
     useEffect(() => {
+        // Drop expired items first, then store the cleaned list.
         const validTimeline = getValidTimelineItems(timeline);
 
         if (validTimeline.length !== timeline.length) {
@@ -23,6 +25,7 @@ const FriendProvider = ({ children }) => {
         saveTimelineToStorage(validTimeline);
     }, [timeline]);
 
+    // Creates a single interaction entry whenever Call/Text/Video is clicked.
     const handleInteraction = (expectedFriend, type) => {
         const now = new Date();
         const labelMap = {
@@ -57,7 +60,26 @@ const FriendProvider = ({ children }) => {
         })
     };
 
+    // Removes all interactions for a single friend from shared state and storage.
+    const clearFriendInteractions = (friendId) => {
+        setTimeline((prev) => prev.filter((item) => item.friendId !== friendId));
+        toast.info('Recent interactions cleared.', {
+            position: "top-center"
+        });
+    };
+
+    // Removes every saved interaction from shared state and storage.
+    const clearAllInteractions = () => {
+        setTimeline([]);
+        toast.info('Timeline cleared.', {
+            position: "top-center"
+        });
+    };
+
+    // Context value exposed to any page/component that needs interaction data.
     const data = {
+        clearAllInteractions,
+        clearFriendInteractions,
         handleInteraction,
         timeline
     };
