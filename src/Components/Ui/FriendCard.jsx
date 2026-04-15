@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { getDaysSinceContact } from '../../utils/dateUtils';
 
 const FriendCard = ({ friend }) => {
 
-    const { name, avatar, daysSinceContact, tag, status } = friend;
+    const { name, avatar, lastContactDate, tag, status } = friend;
+    const daysSinceContact = getDaysSinceContact(lastContactDate);
 
     const statusStyles = {
         overdue: 'bg-[#FE4A49] text-white',

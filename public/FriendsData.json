@@ -7,7 +7,7 @@
     "status": "almost due",
     "note": "Work contact",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-04-04",
     "goalDays": 30,
     "nextDueDate": "2026-02-05"
   },
@@ -19,7 +19,7 @@
     "status": "overdue",
     "note": "Former colleague, great mentor",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-02-13",
     "goalDays": 30,
     "nextDueDate": "2026-02-27"
   },
@@ -31,7 +31,7 @@
     "status": "overdue",
     "note": "Work collaborator",
     "preferredContact": "slack",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-01-28",
     "goalDays": 30,
     "nextDueDate": "2026-02-05"
   },
@@ -43,7 +43,7 @@
     "status": "overdue",
     "note": "Travel buddy",
     "preferredContact": "text",
-    "daysSinceContact": 62,
+    "lastContactDate": "2025-12-20",
     "goalDays": 21,
     "nextDueDate": "2026-02-05"
   },
@@ -55,7 +55,7 @@
     "status": "overdue",
     "note": "Work contact",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-03-01",
     "goalDays": 30,
     "nextDueDate": "2026-02-17"
   },
@@ -67,7 +67,7 @@
     "status": "on-track",
     "note": "Family friend",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-04-10",
     "goalDays": 60,
     "nextDueDate": "2026-03-08"
   },
@@ -79,7 +79,7 @@
     "status": "on-track",
     "note": "Product team partner",
     "preferredContact": "slack",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-03-18",
     "goalDays": 60,
     "nextDueDate": "2026-03-08"
   },
@@ -91,7 +91,7 @@
     "status": "almost due",
     "note": "Travel friend",
     "preferredContact": "text",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-02-24",
     "goalDays": 60,
     "nextDueDate": "2026-03-08"
   },
@@ -103,7 +103,7 @@
     "status": "almost due",
     "note": "Client-side contact",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-03-26",
     "goalDays": 60,
     "nextDueDate": "2026-03-18"
   },
@@ -115,7 +115,7 @@
     "status": "overdue",
     "note": "Close family contact",
     "preferredContact": "email",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-01-11",
     "goalDays": 30,
     "nextDueDate": "2026-02-27"
   },
@@ -127,7 +127,7 @@
     "status": "overdue",
     "note": "Engineering lead contact",
     "preferredContact": "slack",
-    "daysSinceContact": 62,
+    "lastContactDate": "2025-11-30",
     "goalDays": 30,
     "nextDueDate": "2026-02-27"
   },
@@ -139,7 +139,7 @@
     "status": "on-track",
     "note": "Outdoor activity friend",
     "preferredContact": "text",
-    "daysSinceContact": 62,
+    "lastContactDate": "2026-04-14",
     "goalDays": 90,
     "nextDueDate": "2026-04-17"
   }
