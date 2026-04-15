@@ -7,15 +7,14 @@ It provides a clean and interactive UI where users can browse friends, view deta
 
 ## 📸 Preview
 
-```md
 <img src="./src/assets/README/Home.png">
-```
 
 ---
 
 ## 🚀 Live Demo
 
 🔗 Live Website: https://keenkeeper.netlify.app
+
 🔗 GitHub Repository: https://github.com/nafiz2024/Programming-Hero-Assignment-07
 
 ---
@@ -71,7 +70,7 @@ It provides a clean and interactive UI where users can browse friends, view deta
 Clone the repository:
 
 ```bash
-git clone <your-repository-link>
+git clone https://github.com/nafiz2024/Programming-Hero-Assignment-07
 ```
 
 Go to project folder:
