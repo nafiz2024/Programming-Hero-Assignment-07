@@ -23,7 +23,7 @@ const Navbar = () => {
                             <NavLink to="/timeline" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
                                 <LuClock3 /> Timeline
                             </NavLink>
-                            <NavLink to="/friends-details" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
+                            <NavLink to="/stats" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B]'}>
                                 <BsGraphUp /> Stats
                             </NavLink>
                         </ul>
@@ -40,7 +40,7 @@ const Navbar = () => {
                         <NavLink to="/timeline" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
                             <LuClock3 /> Timeline
                         </NavLink>
-                        <NavLink to="/friends-details" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
+                        <NavLink to="/stats" className={({ isActive }) => (isActive ? 'bg-[#244D3F] text-white' : '') + ' py-3 px-4 flex items-center gap-1 text-lg font-semibold rounded-sm text-[#64748B] hover:bg-[#244D3F] hover:text-white'}>
                             <BsGraphUp /> Stats
                         </NavLink>
                     </ul>
@@ -52,6 +52,5 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
 
 

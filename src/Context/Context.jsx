@@ -1,11 +1,27 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import {
+    getStoredTimeline,
+    getValidTimelineItems,
+    saveTimelineToStorage,
+} from '../utils/dateUtils';
 
 export const BookContext = createContext();
 
 const FriendProvider = ({ children }) => {
 
-    const [timeline, setTimeline] = useState([])
+    const [timeline, setTimeline] = useState(() => getStoredTimeline());
+
+    useEffect(() => {
+        const validTimeline = getValidTimelineItems(timeline);
+
+        if (validTimeline.length !== timeline.length) {
+            setTimeline(validTimeline);
+            return;
+        }
+
+        saveTimelineToStorage(validTimeline);
+    }, [timeline]);
 
     const handleInteraction = (expectedFriend, type) => {
         const now = new Date();
