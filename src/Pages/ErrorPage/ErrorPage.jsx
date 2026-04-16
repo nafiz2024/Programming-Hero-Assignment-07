@@ -1,18 +1,7 @@
 import React from 'react';
-import { Link, isRouteErrorResponse, useRouteError } from 'react-router';
+import { Link } from 'react-router';
 
 const ErrorPage = () => {
-    // Reads the router error so we can show a friendly fallback screen.
-    const error = useRouteError();
-
-    const title = isRouteErrorResponse(error)
-        ? `${error.status} ${error.statusText}`
-        : 'Something went wrong';
-
-    const message = isRouteErrorResponse(error)
-        ? error.data?.message || 'The page you requested could not be found.'
-        : error?.message || 'An unexpected error happened while loading this page.';
-
     return (
         <section className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-white to-[#E8F1ED] px-6 py-16">
             <div className="mx-auto flex min-h-[80vh] max-w-3xl items-center justify-center">
@@ -21,10 +10,10 @@ const ErrorPage = () => {
                         Oops, this page is missing
                     </p>
                     <h1 className="mb-4 text-4xl font-bold text-[#1F2937] md:text-5xl">
-                        {title}
+                        404 Page Not Found
                     </h1>
                     <p className="mx-auto mb-8 max-w-xl text-base leading-7 text-[#64748B] md:text-lg">
-                        {message}
+                        The page you requested could not be found. Please check the URL or head back to the homepage.
                     </p>
 
                     <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">

@@ -31,6 +31,10 @@ export const router = createBrowserRouter([
                 // Load the shared friend dataset before rendering a details page.
                 loader: () => fetch("/FriendsData.json")
             },
+            {
+                path: '*',
+                Component: ErrorPage,
+            },
         ]
 
     }
