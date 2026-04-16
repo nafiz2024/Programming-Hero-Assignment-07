@@ -11,12 +11,14 @@ import videoIcon from '../../assets/video.png';
 import { getDaysSinceContact } from '../../utils/dateUtils';
 
 const FriendsDetails = () => {
+    const tagBadgeStyle = 'bg-[#DDFCE7] text-[#2F6E53]';
+
     const { id } = useParams();
     const friends = useLoaderData();
     const { clearFriendInteractions, handleInteraction, timeline } = useContext(BookContext);
 
     // Find the friend that matches the current URL parameter.
-    const expectedFriend = friends.find((friend) => friend.id === id);
+    const expectedFriend = friends.find((friend) => String(friend.id) === id);
 
     if (!expectedFriend) {
         return (
@@ -30,20 +32,64 @@ const FriendsDetails = () => {
     }
 
     const {
+        picture,
         avatar,
         name,
         status,
-        tag,
+        tags = [],
+        bio,
         note,
+        email,
         preferredContact,
+        days_since_contact,
         lastContactDate,
+        goal,
         goalDays,
+        next_due_date,
         nextDueDate,
     } = expectedFriend;
 
-    const daysSinceContact = getDaysSinceContact(lastContactDate);
+    let daysSinceContact = days_since_contact;
 
-    const formattedDate = new Date(nextDueDate).toLocaleDateString('en-US', {
+    if (daysSinceContact === undefined) {
+        daysSinceContact = getDaysSinceContact(lastContactDate);
+    }
+
+    let relationshipGoal = goal;
+
+    if (relationshipGoal === undefined) {
+        relationshipGoal = goalDays;
+    }
+
+    let dueDate = next_due_date;
+
+    if (!dueDate) {
+        dueDate = nextDueDate;
+    }
+
+    let preferredContactLabel = preferredContact;
+
+    if (!preferredContactLabel) {
+        preferredContactLabel = email;
+    }
+
+    if (!preferredContactLabel) {
+        preferredContactLabel = 'Not specified';
+    }
+
+    let profileImage = picture;
+
+    if (!profileImage) {
+        profileImage = avatar;
+    }
+
+    let aboutText = bio;
+
+    if (!aboutText) {
+        aboutText = note;
+    }
+
+    const formattedDate = new Date(dueDate).toLocaleDateString('en-US', {
         month: 'short',
         day: 'numeric',
         year: 'numeric',
@@ -53,12 +99,6 @@ const FriendsDetails = () => {
         overdue: 'bg-[#FE4A49] text-white',
         'almost due': 'bg-[#F59E0B] text-white',
         'on-track': 'bg-[#22C55E] text-white',
-    };
-
-    const tagStyles = {
-        family: 'bg-[#DDFCE7] text-[#2F6E53]',
-        work: 'bg-[#DBEAFE] text-[#1D4ED8]',
-        hobby: 'bg-[#FEF3C7] text-[#B45309]',
     };
 
     // Only show the latest interactions for the current friend on this page.
@@ -90,7 +130,7 @@ const FriendsDetails = () => {
                 <div className="space-y-4">
                     <div className="interactive-card overflow-hidden rounded-[28px] border border-[#EEF2F6] bg-white p-6 text-center shadow-sm">
                         <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-[#DDFCE7] via-white to-[#DBEAFE] p-1">
-                        <img src={avatar} alt={name} className="mx-auto h-16 w-16 rounded-full object-cover ring-4 ring-white transition duration-300 hover:scale-105" />
+                        <img src={profileImage} alt={name} className="mx-auto h-16 w-16 rounded-full object-cover ring-4 ring-white transition duration-300 hover:scale-105" />
                         </div>
                         <h1 className="mt-4 text-[18px] font-semibold text-[#1F2937]">{name}</h1>
                         <div className="mt-3 space-y-2">
@@ -100,15 +140,19 @@ const FriendsDetails = () => {
                             >
                                 {status}
                             </p>
-                            <p
-                                className={`mx-auto w-fit rounded-full px-3 py-1 text-xs font-semibold uppercase shadow-sm transition duration-200 hover:scale-105 hover:shadow-md ${tagStyles[tag] || 'bg-slate-100 text-slate-700'
-                                    }`}
-                            >
-                                {tag}
-                            </p>
+                            <div className="flex flex-wrap items-center justify-center gap-2">
+                                {tags.map((friendTag) => (
+                                    <p
+                                        key={`${expectedFriend.id}-${friendTag}`}
+                                        className={`w-fit rounded-full px-3 py-1 text-xs font-semibold uppercase shadow-sm transition duration-200 hover:scale-105 hover:shadow-md ${tagBadgeStyle}`}
+                                    >
+                                        {friendTag}
+                                    </p>
+                                ))}
+                            </div>
                         </div>
-                        <p className="mt-4 text-[15px] italic text-[#64748B]">"{note}"</p>
-                        <p className="mt-2 text-[15px] text-[#64748B]">Preferred: {preferredContact}</p>
+                        <p className="mt-4 text-[15px] italic text-[#64748B]">"{aboutText}"</p>
+                        <p className="mt-2 text-[15px] text-[#64748B]">Preferred: {preferredContactLabel}</p>
                     </div>
 
                     <div className="flex flex-col gap-2">
@@ -132,7 +176,7 @@ const FriendsDetails = () => {
                             <p className="mt-1 text-lg text-[#64748B]">Days Since Contact</p>
                         </div>
                         <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
-                            <h2 className="text-[28px] font-semibold text-[#244D3F]">{goalDays}</h2>
+                            <h2 className="text-[28px] font-semibold text-[#244D3F]">{relationshipGoal}</h2>
                             <p className="mt-1 text-lg text-[#64748B]">Goal (Days)</p>
                         </div>
                         <div className="interactive-card rounded-2xl border border-[#EEF2F6] bg-white p-7 text-center shadow-sm">
@@ -146,7 +190,7 @@ const FriendsDetails = () => {
                             <div>
                                 <h2 className="text-[18px] font-semibold text-[#244D3F]">Relationship Goal</h2>
                                 <p className="mt-4 text-[16px] text-[#64748B]">
-                                    Connect every <span className="font-semibold text-[#1F2937]">{goalDays} days</span>
+                                    Connect every <span className="font-semibold text-[#1F2937]">{relationshipGoal} days</span>
                                 </p>
                             </div>
                             <button className="btn interactive-button rounded-xl border border-[#DDE6EE] bg-white hover:border-[#244D3F] hover:bg-[#244D3F] hover:text-white">

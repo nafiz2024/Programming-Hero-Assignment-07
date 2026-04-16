@@ -7,6 +7,8 @@ import videoIcon from '../../assets/video.png';
 const Timeline = () => {
     const { clearAllInteractions, timeline } = useContext(BookContext);
     const [filterTimeline, setFilterTimeline] = useState('all');
+    const [searchText, setSearchText] = useState('');
+    const [sortOrder, setSortOrder] = useState('newest');
 
     // Picks the matching image icon for each interaction type.
     const getIcon = (type) => {
@@ -25,10 +27,35 @@ const Timeline = () => {
         return <img src={textIcon} alt="Interaction" className="h-4 w-4" />;
     };
 
-    // Dropdown filter for showing all items or a single interaction type.
-    const filteredTimeline = filterTimeline === 'all'
-        ? timeline
-        : timeline.filter((friend) => friend.type === filterTimeline);
+    // First filter by type from the dropdown.
+    let filteredTimeline = timeline;
+
+    if (filterTimeline !== 'all') {
+        filteredTimeline = timeline.filter((friend) => friend.type === filterTimeline);
+    }
+
+    // Then search by friend name or interaction type.
+    filteredTimeline = filteredTimeline.filter((friend) => {
+        const textToSearch = searchText.toLowerCase();
+        const friendName = (friend.name || '').toLowerCase();
+        const interactionType = (friend.type || '').toLowerCase();
+
+        return friendName.includes(textToSearch) || interactionType.includes(textToSearch);
+    });
+
+    // Finally sort timeline by date.
+    filteredTimeline = [...filteredTimeline];
+
+    filteredTimeline.sort((a, b) => {
+        const firstDate = new Date(a.createdAt).getTime();
+        const secondDate = new Date(b.createdAt).getTime();
+
+        if (sortOrder === 'oldest') {
+            return firstDate - secondDate;
+        }
+
+        return secondDate - firstDate;
+    });
 
     return (
         // Timeline page shows all saved interactions in reverse chronological order.
@@ -36,16 +63,33 @@ const Timeline = () => {
             <div className="container mx-auto flex flex-col gap-6 pb-8">
                 <h1 className='text-5xl font-bold'>Timeline</h1>
                 <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                    <select
-                        value={filterTimeline}
-                        onChange={(e) => setFilterTimeline(e.target.value)}
-                        className="select interactive-button border border-[#E7EDF3] bg-white text-sm text-[#64748B] focus:outline-none"
-                    >
-                        <option value="all">Filter timeline</option>
-                        <option value="call">Call</option>
-                        <option value="text">Text</option>
-                        <option value="video">Video</option>
-                    </select>
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                        <input
+                            type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
+                            placeholder="Search by name or type"
+                            className="input interactive-button w-full border border-[#E7EDF3] bg-white text-sm text-[#64748B] focus:outline-none sm:w-64"
+                        />
+                        <select
+                            value={filterTimeline}
+                            onChange={(e) => setFilterTimeline(e.target.value)}
+                            className="select interactive-button border border-[#E7EDF3] bg-white text-sm text-[#64748B] focus:outline-none"
+                        >
+                            <option value="all">Filter timeline</option>
+                            <option value="call">Call</option>
+                            <option value="text">Text</option>
+                            <option value="video">Video</option>
+                        </select>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="select interactive-button border border-[#E7EDF3] bg-white text-sm text-[#64748B] focus:outline-none"
+                        >
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                        </select>
+                    </div>
                     <button
                         type="button"
                         onClick={clearAllInteractions}

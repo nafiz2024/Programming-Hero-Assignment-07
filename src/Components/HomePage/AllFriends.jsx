@@ -14,16 +14,21 @@ const AllFriends = () => {
     const needAttentionFriends = friends.filter((friend) => friend.status !== 'on-track').length;
 
     const currentDate = new Date();
-    const interactionsThisMonth = friends.filter((friend) => {
-        if (!friend.lastContactDate) {
-            return false;
+    let interactionsThisMonth = 0;
+
+    friends.forEach((friend) => {
+        if (typeof friend.days_since_contact === 'number') {
+            const interactionDate = new Date(currentDate);
+            interactionDate.setDate(currentDate.getDate() - friend.days_since_contact);
+
+            if (
+                interactionDate.getMonth() === currentDate.getMonth()
+                && interactionDate.getFullYear() === currentDate.getFullYear()
+            ) {
+                interactionsThisMonth = interactionsThisMonth + 1;
+            }
         }
-
-        const interactionDate = new Date(friend.lastContactDate);
-
-        return interactionDate.getMonth() === currentDate.getMonth()
-            && interactionDate.getFullYear() === currentDate.getFullYear();
-    }).length;
+    });
 
     return (
         <div className='container mx-auto space-y-10 pb-20'>

@@ -1,82 +1,86 @@
-# 📘 KeenKeeper
+# KeenKeeper
 
-KeenKeeper is a modern React-based friendship management web application that helps users keep track of meaningful relationships.  
-It provides a clean and interactive UI where users can browse friends, view detailed profiles, track recent interactions, and analyze communication habits.
+KeenKeeper is a friendship management web app built with React. It helps users keep track of friends, recent interactions, and communication habits through a simple and clean interface.
 
----
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![Vite](https://img.shields.io/badge/Vite-Frontend-purple?logo=vite)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-Styling-06B6D4?logo=tailwindcss)
+![DaisyUI](https://img.shields.io/badge/DaisyUI-UI-orange)
 
-## 📸 Preview
+## Live Links
 
-<img src="./src/assets/README/Home.png">
+- Live Site: https://keenkeeper.netlify.app
+- GitHub Repository: https://github.com/nafiz2024/Programming-Hero-Assignment-07
 
----
+## Preview
 
-## 🚀 Live Demo
+<img src="./src/assets/README/Home.png" alt="KeenKeeper Home Preview">
 
-🔗 Live Website: https://keenkeeper.netlify.app
+## Key Features
 
-🔗 GitHub Repository: https://github.com/nafiz2024/Programming-Hero-Assignment-07
+- Browse all friends from JSON data
+- View detailed information for each friend
+- Show days since last contact
+- Add `Call`, `Text`, and `Video` interactions
+- Save timeline data in `localStorage`
+- Automatically remove old interactions after 24 hours
+- Search timeline items by any word
+- Filter timeline by interaction type
+- View communication stats in chart format
+- Responsive design for different screen sizes
 
----
+## Pages
 
-## ✨ Features
+### Home Page
+- Shows all friends in card format
+- Displays summary cards like total friends and monthly interactions
 
-- 👥 Browse and manage friend profiles
-- 🔍 View detailed friend information
-- 📅 Dynamic days-since-contact calculation
-- 📞 Add Call, Text, and Video interactions
-- 🕒 View interaction history in Timeline
-- 📊 See communication analytics in Stats page
-- 💾 Store interactions in localStorage
-- ⏳ Auto-delete saved interactions after 24 hours
-- 🎨 Clean and interactive UI using Tailwind CSS
-- 📱 Fully responsive design
-- 🔄 Dynamic data rendering
+### Friend Details Page
+- Shows profile information, tags, goal, and next due date
+- Lets the user add quick interactions
 
----
+### Timeline Page
+- Shows all saved interactions
+- Supports searching and filtering
 
-## 🧠 How It Works
+### Stats Page
+- Displays interaction data using charts
 
-1. The app loads friend data from `FriendsData.json`.
-2. Friends are displayed in card format on the homepage.
-3. Clicking a friend opens the details page.
-4. Users can create interactions using Call, Text, and Video buttons.
-5. Interactions are stored in context and localStorage.
-6. Timeline and Stats update automatically from saved interaction data.
-7. Old interactions are removed automatically after 24 hours.
+## Technologies Used
 
----
-
-## 🛠️ Technologies Used
-
-### Frontend
-- React.js
-- JavaScript (ES6+)
+- React
+- React Router
 - Tailwind CSS
 - DaisyUI
-- React Router
 - React Icons
 - React Toastify
 - Recharts
-
-### Data
+- JavaScript
 - JSON
 - localStorage
 
----
+## How It Works
 
-## 📦 Installation
+1. Friend data loads from `public/FriendsData.json`.
+2. The homepage shows all friend cards.
+3. Clicking a card opens the friend details page.
+4. Users can add interactions using quick action buttons.
+5. Timeline data is saved in context and `localStorage`.
+6. Stats update automatically based on timeline data.
+7. Old interaction data is removed after 24 hours.
 
-Clone the repository:
+## Installation
+
+Clone the project:
 
 ```bash
 git clone https://github.com/nafiz2024/Programming-Hero-Assignment-07
 ```
 
-Go to project folder:
+Go to the project folder:
 
 ```bash
-cd Assignment-7
+cd Programming-Hero-Assignment-07
 ```
 
 Install dependencies:
@@ -91,7 +95,7 @@ Run the project:
 npm run dev
 ```
 
-Build for production:
+Build the project:
 
 ```bash
 npm run build
@@ -103,96 +107,70 @@ Run lint:
 npm run lint
 ```
 
----
-
-## 📂 Project Structure
+## Project Structure
 
 ```bash
 KeenKeeper
-│
 ├── public
 │   └── FriendsData.json
-│
 ├── src
-│   │
 │   ├── assets
-│   │
 │   ├── Components
 │   │   ├── HomePage
 │   │   ├── Shared
 │   │   └── Ui
-│   │
 │   ├── Context
 │   │   └── Context.jsx
-│   │
 │   ├── Layout
 │   │   └── MainLayout.jsx
-│   │
 │   ├── Pages
 │   │   ├── HomePage
 │   │   ├── FriendsDetails
 │   │   ├── Timeline
 │   │   ├── Stats
 │   │   └── ErrorPage
-│   │
 │   ├── Routes
 │   │   └── Routes.jsx
-│   │
 │   ├── utils
 │   │   └── dateUtils.js
-│   │
 │   ├── main.jsx
 │   └── index.css
-│
 ├── package.json
 ├── vite.config.js
 └── README.md
 ```
 
----
-
-## 📸 Screenshots
+## Screenshots
 
 ### Home Page
-
-<img src="./src/assets/README/Home.png">
+<img src="./src/assets/README/Home.png" alt="Home Page">
 
 ### Friend Details Page
-
-<img src="./src/assets/README/FriendsDetails.png">
+<img src="./src/assets/README/FriendsDetails.png" alt="Friend Details Page">
 
 ### Timeline Page
-
-<img src="./src/assets/README/Timeline.png">
+<img src="./src/assets/README/Timeline.png" alt="Timeline Page">
 
 ### Stats Page
+<img src="./src/assets/README/Stats.png" alt="Stats Page">
 
-<img src="./src/assets/README/Stats.png">
+## Future Improvements
 
----
-
-## 🔮 Future Improvements
-
-- Add create/edit friend feature
-- Add confirm modal before deleting interactions
-- Add backend database integration
-- Add authentication system
+- Add create and edit friend feature
+- Add confirmation modal before delete
+- Add backend database
+- Add authentication
 - Add dark mode
-- Add more analytics and charts
+- Add more chart insights
 
----
+## Author
 
-## 👨‍💻 Author
+**Nafiz Alam**
 
-**Nafiz Alam**  
-Frontend Web Developer | MERN Stack Developer
+- GitHub: https://github.com/nafiz2024
+- LinkedIn: https://www.linkedin.com/in/nafiz-alam04/
+- Email: nafizalam.dev@gmail.com
 
-- 🌐 GitHub: https://github.com/nafiz2024
-- 💼 LinkedIn: https://www.linkedin.com/in/nafiz-alam04/
-- 📧 Email: nafizalam.dev@gmail.com
+## Support
 
----
-
-## ⭐ Support
-
-If you like this project, give it a star on GitHub ⭐
+If you like this project, consider giving it a star on GitHub.
