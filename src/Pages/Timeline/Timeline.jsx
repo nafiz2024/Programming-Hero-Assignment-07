@@ -27,6 +27,19 @@ const Timeline = () => {
         return <img src={textIcon} alt="Interaction" className="h-4 w-4" />;
     };
 
+    const makeTitleText = (text) => {
+        const words = text.split(' ');
+        const firstWord = words[0] || '';
+        const otherWords = words.slice(1).join(' ');
+
+        return (
+            <>
+                <strong>{firstWord}</strong>
+                {otherWords ? ` ${otherWords}` : ''}
+            </>
+        );
+    };
+
     // First filter by type from the dropdown.
     let filteredTimeline = timeline;
 
@@ -100,24 +113,28 @@ const Timeline = () => {
                 </div>
             </div>
             <div className="container mx-auto space-y-6">
-                {filteredTimeline.length > 0 ? filteredTimeline.map((friend) => (
-                    <div
-                        key={friend.id}
-                        className="interactive-card flex items-center gap-3 rounded-2xl border border-[#E7EDF3] bg-white px-4 py-4 shadow-sm"
-                    >
-                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#DDE6EE] bg-[#F8FAFC]">
-                            {getIcon(friend.type)}
+                {filteredTimeline.length > 0 ? filteredTimeline.map((friend) => {
+                    const titleText = friend.title || friend.name || '';
+
+                    return (
+                        <div
+                            key={friend.id}
+                            className="interactive-card flex items-center gap-3 rounded-2xl border border-[#E7EDF3] bg-white px-4 py-4 shadow-sm"
+                        >
+                            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-[#DDE6EE] bg-[#F8FAFC]">
+                                {getIcon(friend.type)}
+                            </div>
+                            <div className="min-w-0">
+                                <h1 className="text-[13px] font-medium leading-none text-[#1E3A5F]">
+                                    {makeTitleText(titleText)}
+                                </h1>
+                                <p className="mt-2 text-[11px] leading-none text-[#8AA0BA]">
+                                    {friend.date || friend.displayDate || 'No date'}
+                                </p>
+                            </div>
                         </div>
-                        <div className="min-w-0">
-                            <h1 className="text-[13px] font-medium leading-none text-[#1E3A5F]">
-                                {friend.title || friend.name}
-                            </h1>
-                            <p className="mt-2 text-[11px] leading-none text-[#8AA0BA]">
-                                {friend.date || friend.displayDate || 'No date'}
-                            </p>
-                        </div>
-                    </div>
-                )) : (
+                    );
+                }) : (
                     <div className="rounded-sm border border-[#E7EDF3] bg-white px-4 py-6 text-sm text-[#64748B] shadow-sm">
                         {timeline.length === 0 ? 'No interactions yet.' : 'No matching interactions found.'}
                     </div>
